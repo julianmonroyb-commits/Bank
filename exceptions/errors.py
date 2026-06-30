@@ -1,27 +1,27 @@
-class BancoError(Exception):
+class BankError(Exception):
     pass
 
-class InsufficientFundsError(BancoError):
+class InsufficientFundsError(BankError):
     def __init__ (self, current_balance, requested_amount):
         self.current_balance = current_balance
         self.requested_amount = requested_amount
         message = f"Insufficient funds. Available: {current_balance}, Requested: {requested_amount}"
         super().__init__(message)
 
-class OverdraftLimitExeceeded(BancoError):
+class OverdraftLimitExceeded(BankError):
     def __init__(self, limit, requested_amount):
         self.limit = limit
         self.requested_amount = requested_amount
         message = f"Overdraft limit exceeded. Limit: {limit}, Requested: {requested_amount}"
         super().__init__(message)
 
-class AccountNotFoundError(BancoError):
+class AccountNotFoundError(BankError):
     def __init__(self, searched_number):
         self.searched_number = self.searched_number
         message = f"Account {searched_number} was not found"
         super().__init___(message)
 
-class InvalidTransferError(BancoError):
+class InvalidTransferError(BankError):
     def __init__(self, message = f"Invalid Transfer Error"):
         super().__init__(message)
 

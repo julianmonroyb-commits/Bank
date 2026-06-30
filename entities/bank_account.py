@@ -1,12 +1,13 @@
 class BankAccount:
     _counter = 0
-    def __init__ (self, holder, balance):
+
+    def __init__(self, holder, balance):
         if balance < 0:
-            raise ValueError ("Initial Balance cannot be negative")
+            raise ValueError("Initial balance cannot be negative")
         BankAccount._counter += 1
-        self.__number = f"SMART-{BankAccount._counter:04d}"
-        self.__holder = holder
-        self.__balance = balance
+        self._BankAccount__number = f"SMART-{BankAccount._counter:04d}"
+        self._BankAccount__balance = balance
+        self._BankAccount__holder = holder
 
     @property
     def holder(self):
@@ -21,12 +22,18 @@ class BankAccount:
         return self.__number
     
     def deposit(self, amount):
-        if amount < 0:
+        if amount <= 0:
             raise ValueError("Deposit amount must be positive")
-        self.__balance += amount
+        self._BankAccount__balance += amount
 
     def withdraw(self, amount):
-        raise NotImplementedError ("Subclasses must implement withdraw")
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive")
+        if self._BankAccount__balance < amount:
+            from exceptions.errors import InsufficientFundsError
+            raise InsufficientFundsError(self._BankAccount__balance, amount)
+        self._BankAccount__balance -= amount
+
     
     def get_info(self):
         return {

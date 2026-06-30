@@ -1,5 +1,5 @@
 from entities.bank_account import BankAccount
-from exeptions.errors import InsufficientFundsError
+from exceptions.errors import InsufficientFundsError
 
 class SavingsAccount(BankAccount):
     interest_rate = 0.03
